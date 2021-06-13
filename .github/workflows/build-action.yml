@@ -1,0 +1,51 @@
+# Gradleのビルドとテストまで実行します
+name: Build Ktor Sample
+
+on:
+  # mainブランチに対するPullRequestを行う元のブランチ と pushした後のmainブランチを実行対象にします。
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+  # workflowの手動実行を許可
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    # ubuntuで実行
+    runs-on: ubuntu-latest
+
+    steps:
+      # リポジトリの checkout
+      - uses: actions/checkout@v2
+
+      # OpenJDK のセットアップ
+      - name: Set up JDK
+        uses: actions/setup-java@v2.1.0
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+
+      # 依存関係のキャッシング
+      - name: Cache Gradle package
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{runner.os}}-graled_${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      # Gradleのビルドを実行 (testまで)
+      - name: Build with Gradle
+        run: ./gradlew clean test
+
+      # 不要なキャッシュの削除
+      - name: Cleanup Gradle Cache
+        run: |
+          rm -f ~/.gradle/caches/modules-2/modules-2.lock
+          rm -f ~/.gradle/caches/modules-2/gc.properties

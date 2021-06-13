@@ -1,17 +1,26 @@
 package com.example.plugins
 
-import io.ktor.routing.*
-import io.ktor.http.*
+import com.example.routing.authenticatedUserRoute
+import com.example.routing.bookRoute
+import com.example.routing.greetingRoute
+import com.example.routing.hello
+import com.example.routing.userRoute
 import io.ktor.application.*
-import io.ktor.response.*
-import io.ktor.request.*
+import io.ktor.auth.*
+import io.ktor.locations.*
+import io.ktor.routing.*
 
+@KtorExperimentalLocationsAPI
 fun Application.configureRouting() {
     // Starting point for a Ktor app:
     routing {
-        get("/") {
-            call.respondText("Hello World!")
+        authenticate {
+            authenticatedUserRoute()
         }
+        greetingRoute()
+        hello()
+        userRoute()
+        bookRoute()
     }
 
 }
