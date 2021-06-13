@@ -17,6 +17,4 @@ fun Routing.bookRoute() {
     }
 }
 
-data class BookResponse(val id: Long, val title: String, val author: String) {
-
-}
+data class BookResponse(val id: Long, val title: String, val author: String) {}
