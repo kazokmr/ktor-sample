@@ -1,7 +1,8 @@
 package com.example.plugins
 
-import com.example.location.userRoute
+import com.example.routing.bookRoute
 import com.example.routing.greetingRoute
+import com.example.routing.userRoute
 import io.ktor.application.*
 import io.ktor.locations.*
 import io.ktor.response.*
@@ -13,6 +14,7 @@ fun Application.configureRouting() {
     routing {
         greetingRoute()
         userRoute()
+        bookRoute()
         get("/hello/{name}") {
             val name = call.parameters["name"]
             call.respondText("Hello $name!")

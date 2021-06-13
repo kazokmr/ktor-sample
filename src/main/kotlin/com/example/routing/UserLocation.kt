@@ -1,4 +1,4 @@
-package com.example.location
+package com.example.routing
 
 import io.ktor.application.*
 import io.ktor.locations.*
