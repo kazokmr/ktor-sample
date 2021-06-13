@@ -1,7 +1,9 @@
 package com.example
 
+import com.example.plugins.basicAuthentication
 import com.example.plugins.configureRouting
 import io.ktor.application.*
+import io.ktor.auth.*
 import io.ktor.features.*
 import io.ktor.jackson.*
 import io.ktor.locations.*
@@ -14,6 +16,18 @@ fun main() {
         install(Locations)
         install(ContentNegotiation) {
             jackson()
+        }
+        install(Authentication) {
+            basicAuthentication()
+//            basic {
+//                validate { credentials ->
+//                    if (credentials.name == "user" && credentials.password == "password") {
+//                        UserIdPrincipal(credentials.name)
+//                    } else {
+//                        null
+//                    }
+//                }
+//            }
         }
         configureRouting()
     }.start(wait = true)
