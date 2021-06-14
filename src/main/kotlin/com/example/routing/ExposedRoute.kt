@@ -1,5 +1,7 @@
 package com.example.routing
 
+import com.example.entity.Member
+import com.example.entity.MemberEntity
 import io.ktor.routing.*
 import org.jetbrains.exposed.dao.IntEntity
 import org.jetbrains.exposed.dao.IntEntityClass
@@ -14,11 +16,15 @@ import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.transactions.transaction
 
 fun Routing.exposed() {
+
     route("/exposed") {
+
         connectDatabase()
+
         get("/dsl") {
             dsl()
         }
+
         get("dao") {
             dao()
         }
@@ -58,21 +64,6 @@ private fun dsl() {
         println("id: ${member[Member.id]}")
         println("name: ${member[Member.name]}")
     }
-}
-
-object MemberTable : IntIdTable("member") {
-    val name = varchar("name", 32)
-}
-
-class MemberEntity(id: EntityID<Int>) : IntEntity(id) {
-    companion object : IntEntityClass<MemberEntity>(MemberTable)
-
-    var name by MemberTable.name
-}
-
-object Member : Table("member") {
-    val id = integer("id").autoIncrement()
-    val name = varchar("name", 32)
 }
 
 private fun connectDatabase() {
