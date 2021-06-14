@@ -2,6 +2,8 @@ package com.example.plugins
 
 import com.example.routing.authenticatedUserRoute
 import com.example.routing.bookRoute
+import com.example.routing.crud
+import com.example.routing.exposed
 import com.example.routing.greetingRoute
 import com.example.routing.hello
 import com.example.routing.userRoute
@@ -21,6 +23,8 @@ fun Application.configureRouting() {
         hello()
         userRoute()
         bookRoute()
+        exposed()
+        crud()
     }
 
 }
