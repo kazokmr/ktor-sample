@@ -19,6 +19,18 @@ class UserServiceTest : StringSpec() {
             result shouldBe "Hello Kotest"
             verify { userRepository.findName(id) }
         }
+
+        "createMessage:: when user name is not exist then return null"{
+            val userRepository = mockk<UserRepository>()
+            val service = UserService(userRepository)
+            every { userRepository.findName(any()) } returns null
+
+            val id = 100
+            val result = service.createMessage(id)
+
+            result shouldBe null
+            verify { userRepository.findName(id) }
+        }
     }
 }
 
