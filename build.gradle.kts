@@ -25,9 +25,14 @@ dependencies {
     implementation("io.ktor:ktor-jackson:$ktor_version")
     implementation("io.ktor:ktor-auth:$ktor_version")
     implementation("ch.qos.logback:logback-classic:$logback_version")
-    implementation("org.jetbrains.exposed:exposed-core:0.29.1")
-    implementation("org.jetbrains.exposed:exposed-dao:0.29.1")
-    implementation("org.jetbrains.exposed:exposed-jdbc:0.29.1")
+    implementation("org.jetbrains.exposed:exposed-core:0.32.1")
+    implementation("org.jetbrains.exposed:exposed-dao:0.32.1")
+    implementation("org.jetbrains.exposed:exposed-jdbc:0.32.1")
     runtimeOnly("org.postgresql:postgresql:42.2.21.jre7")
     testImplementation("io.ktor:ktor-server-tests:$ktor_version")
+    testImplementation("io.kotest:kotest-runner-junit5-jvm:4.6.0")
+}
+
+tasks.test {
+    useJUnitPlatform()
 }
