@@ -15,7 +15,6 @@ application {
 
 repositories {
     mavenCentral()
-    jcenter()
 }
 
 dependencies {
@@ -31,6 +30,7 @@ dependencies {
     runtimeOnly("org.postgresql:postgresql:42.2.21.jre7")
     testImplementation("io.ktor:ktor-server-tests:$ktor_version")
     testImplementation("io.kotest:kotest-runner-junit5-jvm:4.6.0")
+    testImplementation("io.mockk:mockk:1.11.0")
 }
 
 tasks.test {
